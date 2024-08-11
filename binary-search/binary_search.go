@@ -1,6 +1,10 @@
 package binary_search
 
-func BinarySearch(haystack []int, needle int) int {
+import (
+  "errors"
+)
+
+func BinarySearch(haystack []int, needle int) (int, error) {
   lo := 0
   hi := len(haystack)
 
@@ -9,7 +13,7 @@ func BinarySearch(haystack []int, needle int) int {
 
     switch {
     case haystack[mi] == needle:
-        return mi
+        return mi, nil
     case haystack[mi] < needle:
         lo = mi + 1
     case haystack[mi] > needle:
@@ -17,5 +21,5 @@ func BinarySearch(haystack []int, needle int) int {
     }
   }
 
-  return -1
+  return 0, errors.New("needle not in haystack")
 }

@@ -1,6 +1,8 @@
 package binary_search
 
-import "testing"
+import (
+  "testing"
+)
 
 func TestBinarySearch(t *testing.T) {
   arr := make([]int, 10)
@@ -9,19 +11,29 @@ func TestBinarySearch(t *testing.T) {
   }
 
   cases := []struct {
-    in, want int
+    in int
+    want int
+    wantErr bool
   } {
-    {0, 0},
-    {1, 1},
-    {2, 2},
-    {12, -1},
+    {0, 0, false},
+    {1, 1, false},
+    {2, 2, false},
+    {12, 0, true},
   }
 
   for _, c := range cases {
-    got := BinarySearch(arr, c.in)
+    value, err := BinarySearch(arr, c.in)
 
-    if got != c.want {
-      t.Errorf("BinarySearch(%d) == %d, expected %d", c.in, got, c.want)
+    if err != nil && !c.wantErr {
+      t.Errorf("error occured: %v", err)
+    }
+
+    if c.wantErr && err == nil {
+      t.Errorf("expected error, got nil")
+    }
+
+    if value != c.want {
+      t.Errorf("BinarySearch(%d) == (%d, %v), expected (%d, %v)", c.in, value, err, c.want, c.wantErr)
     }
   }
 }
