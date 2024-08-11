@@ -2,7 +2,6 @@ pub mod binary_search;
 pub mod two_crystal_balls;
 pub mod bubble_sort;
 pub mod queue;
-pub mod maze_solver;
 
 #[cfg(test)]
 mod tests {
