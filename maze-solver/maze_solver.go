@@ -1,7 +1,6 @@
 package maze_solver
 
 import (
-  "fmt"
   "errors"
 )
 
@@ -22,7 +21,6 @@ func Solve(maze Maze, start Point, end Point) ([]Point, error) {
   stack := make([]Point, 0)
   visited := make(map[Point]bool)
 
-  fmt.Printf("stack=%v\nvisited=%v\n\n", stack, visited)
   if _solve(maze, end, start, &stack, visited) {
     return stack, nil
   }
@@ -31,8 +29,6 @@ func Solve(maze Maze, start Point, end Point) ([]Point, error) {
 }
 
 func _solve(maze Maze, end Point, current Point, stack *[]Point, visited map[Point]bool) bool {
-  fmt.Printf("stack=%v\nvisited=%v\n\n", stack, visited)
-
   if (current.y >= len(maze) || current.y < 0) || (current.x >= len(maze[0]) || current.x < 0) {
     return false
   }
