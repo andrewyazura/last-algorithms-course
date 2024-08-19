@@ -1,17 +1,17 @@
 package quick_sort
 
 import (
-  "testing"
-  "slices"
-  "math/rand"
+	"math/rand"
+	"slices"
+	"testing"
 )
 
 func TestQuickSort(t *testing.T) {
-  array := rand.Perm(1_000_000)
-  
-  QuickSort(array)
+	array := rand.Perm(1_000_000)
 
-  if !slices.IsSorted(array) {
-    t.Errorf("array is not sorted")
-  }
+	QuickSort(array)
+
+	if !slices.IsSorted(array) {
+		t.Errorf("array is not sorted")
+	}
 }

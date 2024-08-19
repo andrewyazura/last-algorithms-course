@@ -1,17 +1,17 @@
 package bubble_sort
 
 import (
-  "testing"
-  "slices"
-  "math/rand"
+	"math/rand"
+	"slices"
+	"testing"
 )
 
 func TestBubbleSort(t *testing.T) {
-  array := rand.Perm(10_000)
+	array := rand.Perm(10_000)
 
-  BubbleSort(array)
+	BubbleSort(array)
 
-  if !slices.IsSorted(array) {
-      t.Errorf("array is not sorted")
-  }
+	if !slices.IsSorted(array) {
+		t.Errorf("array is not sorted")
+	}
 }
