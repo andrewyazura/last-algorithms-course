@@ -2,24 +2,16 @@ package bubble_sort
 
 import (
   "testing"
+  "slices"
+  "math/rand"
 )
 
 func TestBubbleSort(t *testing.T) {
-  arr := make([]int, 10)
-  for i := range arr {
-    arr[9 - i] = i
-  }
+  array := rand.Perm(10_000)
 
-  wantArr := make([]int, 10)
-  for i := range wantArr {
-    wantArr[i] = i
-  }
+  BubbleSort(array)
 
-  BubbleSort(arr)
-
-  for i := range arr {
-    if arr[i] != wantArr[i] {
-      t.Errorf("BubbleSort(%v) != %v", arr, wantArr)
-    }
+  if !slices.IsSorted(array) {
+      t.Errorf("array is not sorted")
   }
 }
