@@ -50,3 +50,14 @@ func TestPostOrder(t *testing.T) {
 		t.Errorf("%v != %v", path, expected)
 	}
 }
+
+func TestBreadthFirst(t *testing.T) {
+  r := getTree()
+  path := TraverseBreadthFirst(r)
+
+  expected := []int{5, 1, 7, 0, 3, 6, 9}
+
+  if !reflect.DeepEqual(path, expected) {
+    t.Errorf("%v != %v", path, expected)
+  }
+}
