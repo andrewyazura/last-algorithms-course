@@ -61,3 +61,33 @@ func TestBreadthFirst(t *testing.T) {
     t.Errorf("%v != %v", path, expected)
   }
 }
+
+func TestCompareTrees(t *testing.T) {
+  r1 := getTree()
+  r2 := getTree()
+
+  if !CompareTrees(r1, r2) {
+    t.Errorf("Trees are equal")
+  }
+
+  r2.right.right.value = 10
+
+  if CompareTrees(r1, r2) {
+    t.Errorf("Trees are not equal")
+  }
+}
+
+func TestCompareTreesAsync(t *testing.T) {
+  r1 := getTree()
+  r2 := getTree()
+
+  if !CompareTreesAsync(r1, r2) {
+    t.Errorf("Trees are equal")
+  }
+
+  r2.right.right.value = 10
+
+  if CompareTreesAsync(r1, r2) {
+    t.Errorf("Trees are not equal")
+  }
+}

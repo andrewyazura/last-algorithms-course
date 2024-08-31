@@ -66,3 +66,63 @@ func TraverseBreadthFirst[T comparable](node *Node[T]) []T {
 
 	return result
 }
+
+func CompareTrees[T comparable](a *Node[T], b *Node[T]) bool {
+	if a == nil && b == nil {
+		return true
+	}
+
+	if a == nil || b == nil {
+		return false
+	}
+
+	if a.value != b.value {
+		return false
+	}
+
+	return CompareTrees(a.left, b.left) && CompareTrees(a.right, b.right)
+}
+
+func Walk[T comparable](node *Node[T], ch chan *T) {
+	if node == nil {
+		ch <- nil
+		return
+	}
+
+	ch <- &node.value
+	Walk(node.left, ch)
+	Walk(node.right, ch)
+}
+
+func CompareTreesAsync[T comparable](a *Node[T], b *Node[T]) bool {
+	ch_a := make(chan *T)
+	ch_b := make(chan *T)
+
+	go func() {
+		Walk(a, ch_a)
+		close(ch_a)
+	}()
+
+	go func() {
+		Walk(b, ch_b)
+		close(ch_b)
+	}()
+
+	for i := range ch_a {
+		j := <-ch_b
+
+		if i == nil && j == nil {
+			continue
+		}
+
+		if i == nil || j == nil {
+			return false
+		}
+
+		if *i != *j {
+			return false
+		}
+	}
+
+	return true
+}
